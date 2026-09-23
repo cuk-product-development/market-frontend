@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Product } from "../../types";
 
@@ -7,6 +7,30 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:4000";
 function imgSrc(url?: string) {
   if (!url) return null;
   return url.startsWith("http") ? url : `${API}${url}`;
+}
+
+function ProductImage({ src, alt }: { src: string; alt: string }) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className="product-img-placeholder d-flex align-items-center justify-content-center bg-light"
+        style={{ aspectRatio: "1", fontSize: "2.5rem" }}>
+        📦
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      className="card-img-top product-img w-100"
+      alt={alt}
+      loading="lazy"
+      onError={() => setError(true)}
+      style={{ aspectRatio: "1", objectFit: "cover" }}
+    />
+  );
 }
 
 export default function ProductCard({ product, onAddCart }: {
@@ -20,8 +44,9 @@ export default function ProductCard({ product, onAddCart }: {
     <div className="card product-card h-100">
       <Link to={`/products/${product.id}`} className="text-decoration-none">
         {src
-          ? <img src={src} className="card-img-top product-img w-100" alt={product.name} loading="lazy" />
-          : <div className="product-img-placeholder">📦</div>
+          ? <ProductImage src={src} alt={product.name} />
+          : <div className="product-img-placeholder d-flex align-items-center justify-content-center bg-light"
+              style={{ aspectRatio: "1", fontSize: "2.5rem" }}>📦</div>
         }
         <div className="card-body p-2">
           <div className="product-name mb-1">{product.name}</div>
