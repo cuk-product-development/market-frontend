@@ -152,8 +152,11 @@ export default function SellerProducts() {
                         <td>
                           <div className="d-flex align-items-center gap-3">
                             <div style={{ width: 48, height: 48, borderRadius: 8, overflow: "hidden", background: "#f8f9fa", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                              {img ? <img src={img} alt={p.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }} />
-                                : <span style={{ fontSize: "1.4rem" }}>📦</span>}
+                              {img
+                          ? <img src={img} alt={p.name}
+                              style={{ width: "100%", height: "100%", objectFit: "contain", padding: 2 }}
+                              onError={e => { const t = e.target as HTMLImageElement; t.style.display="none"; const parent = t.parentElement; if(parent){ parent.innerHTML='<span style="font-size:1.4rem">📦</span>'; } }} />
+                          : <span style={{ fontSize: "1.4rem" }}>📦</span>}
                             </div>
                             <div>
                               <div className="fw-semibold" style={{ fontSize: ".875rem" }}>{p.name}</div>
