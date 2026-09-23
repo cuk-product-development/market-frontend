@@ -125,7 +125,8 @@ export default function ProductDetail() {
                   style={{ minHeight: 380, borderRadius: "10px 0 0 10px" }}>
                   {imgSrc
                     ? <img src={imgSrc} alt={product.name}
-                        style={{ maxWidth: "100%", maxHeight: 360, objectFit: "contain", padding: 20 }} />
+                        style={{ maxWidth: "100%", maxHeight: 360, objectFit: "contain", padding: 20 }}
+                        onError={e => { const t = e.target as HTMLImageElement; t.style.display="none"; const p = t.parentElement; if(p) { p.innerHTML = '<span style="font-size:6rem">📦</span>'; } }} />
                     : <span style={{ fontSize: "6rem" }}>📦</span>
                   }
                 </div>
