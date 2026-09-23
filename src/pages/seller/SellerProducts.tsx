@@ -189,8 +189,9 @@ export default function SellerProducts() {
 
       {/* Add/Edit Modal */}
       {showModal && (
-        <div className="modal fade show d-block" tabIndex={-1} style={{ background: "rgba(0,0,0,.5)" }}>
-          <div className="modal-dialog modal-lg modal-dialog-scrollable">
+        <div className="modal fade show d-block" tabIndex={-1}
+          style={{ background: "rgba(0,0,0,.5)", overflowY: "auto" }}>
+          <div className="modal-dialog modal-lg" style={{ margin: "20px auto" }}>
             <div className="modal-content border-0 shadow">
               <div className="modal-header">
                 <h5 className="modal-title fw-bold">
